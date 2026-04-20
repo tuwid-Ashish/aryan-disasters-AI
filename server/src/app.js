@@ -1,5 +1,6 @@
 import cors from "cors";
 import express from "express";
+import mongoose from "mongoose";
 import morgan from "morgan";
 import { env } from "./config/env.js";
 import authRoutes from "./modules/auth/auth.routes.js";
@@ -15,6 +16,30 @@ import { errorHandler, notFound } from "./middleware/error.middleware.js";
 
 const app = express();
 
+const dbStateLabel = {
+  0: "disconnected",
+  1: "connected",
+  2: "connecting",
+  3: "disconnecting"
+};
+
+function getHealthPayload() {
+  const dbReadyState = mongoose.connection.readyState;
+  return {
+    service: "aryan-disasters-ai-server",
+    status: "ok",
+    environment: env.nodeEnv,
+    timestamp: new Date().toISOString(),
+    uptimeSeconds: Math.floor(process.uptime()),
+    checks: {
+      database: {
+        status: dbStateLabel[dbReadyState] || "unknown",
+        readyState: dbReadyState
+      }
+    }
+  };
+}
+
 app.use(
   cors({
     origin: env.clientUrl,
@@ -25,9 +50,24 @@ app.use(express.json());
 app.use(morgan("dev"));
 
 app.get("/api/health", (req, res) => {
-  res.json({
+  return res.status(200).json({
     success: true,
-    message: "Server is healthy"
+    message: "Server is alive",
+    data: getHealthPayload()
+  });
+});
+
+app.get("/api/health/ready", (req, res) => {
+  const payload = getHealthPayload();
+  const isReady = payload.checks.database.status === "connected";
+
+  return res.status(isReady ? 200 : 503).json({
+    success: isReady,
+    message: isReady ? "Server is ready" : "Server is not ready",
+    data: {
+      ...payload,
+      status: isReady ? "ok" : "degraded"
+    }
   });
 });
 

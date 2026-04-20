@@ -18,6 +18,16 @@ import { DonorResourcesPage } from "../pages/donor/DonorResourcesPage";
 import { NewResourcePage } from "../pages/donor/NewResourcePage";
 import { VolunteerTasksPage } from "../pages/volunteer/VolunteerTasksPage";
 
+function NotFoundRedirect() {
+  const { isAuthenticated, isBootstrapping } = useAuth();
+
+  if (isBootstrapping) {
+    return <main className="auth-page"><section className="auth-card"><h1>Loading workspace...</h1></section></main>;
+  }
+
+  return <Navigate to={isAuthenticated ? "/dashboard" : "/login"} replace />;
+}
+
 function ProtectedRoute() {
   const { isAuthenticated, isBootstrapping } = useAuth();
 
@@ -86,5 +96,9 @@ export const router = createBrowserRouter([
         ]
       }
     ]
+  },
+  {
+    path: "*",
+    element: <NotFoundRedirect />
   }
 ]);

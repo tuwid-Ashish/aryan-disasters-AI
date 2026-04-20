@@ -31,13 +31,13 @@ export function VolunteerDashboardPage() {
     },
     {
       label: "Active Deliveries",
-      value: formatNumber(taskItems.filter((item) => ["assigned", "in_progress", "picked_up"].includes(item.status)).length),
+      value: formatNumber(taskItems.filter((item) => ["assigned", "picked", "in_transit"].includes(item.status)).length),
       note: "Tasks currently moving through field execution.",
       badge: "Active"
     },
     {
       label: "Completed Tasks",
-      value: formatNumber(taskItems.filter((item) => ["completed", "delivered"].includes(item.status)).length),
+      value: formatNumber(taskItems.filter((item) => item.status === "completed").length),
       note: "Assignments successfully finished.",
       badge: "Done"
     },

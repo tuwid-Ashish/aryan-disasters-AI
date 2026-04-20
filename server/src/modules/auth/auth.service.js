@@ -17,6 +17,12 @@ function signToken(user) {
 }
 
 export async function registerUser(payload) {
+  if (payload.role === "admin") {
+    const error = new Error("Admin accounts cannot be created from the public registration endpoint.");
+    error.statusCode = 403;
+    throw error;
+  }
+
   const existingUser = await User.findOne({ email: payload.email });
   if (existingUser) {
     const error = new Error("User already exists with this email.");

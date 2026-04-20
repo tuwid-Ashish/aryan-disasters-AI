@@ -1,4 +1,4 @@
-const validRoles = ["admin", "donor", "beneficiary", "volunteer"];
+const validRoles = ["donor", "beneficiary", "volunteer"];
 
 export function validateRegister(body) {
   const errors = [];
@@ -8,7 +8,7 @@ export function validateRegister(body) {
   if (!body.password?.trim() || body.password.length < 6) {
     errors.push("Password must be at least 6 characters.");
   }
-  if (!validRoles.includes(body.role)) errors.push("Role is invalid.");
+  if (!validRoles.includes(body.role)) errors.push("Role is invalid for self-registration.");
 
   return errors;
 }
