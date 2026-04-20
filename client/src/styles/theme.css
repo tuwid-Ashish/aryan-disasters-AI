@@ -1,0 +1,12 @@
+.status-critical {
+  color: #a02121;
+}
+
+.status-warning {
+  color: #9a5f00;
+}
+
+.status-success {
+  color: #17634c;
+}
+
