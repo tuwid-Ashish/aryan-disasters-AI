@@ -1,7 +1,7 @@
 import cors from "cors";
 import express from "express";
-import mongoose from "mongoose";
 import morgan from "morgan";
+import { getDbDebugInfo, isDbConnected } from "./config/db.js";
 import { env } from "./config/env.js";
 import authRoutes from "./modules/auth/auth.routes.js";
 import disasterRoutes from "./modules/disasters/disaster.routes.js";
@@ -16,15 +16,7 @@ import { errorHandler, notFound } from "./middleware/error.middleware.js";
 
 const app = express();
 
-const dbStateLabel = {
-  0: "disconnected",
-  1: "connected",
-  2: "connecting",
-  3: "disconnecting"
-};
-
 function getHealthPayload() {
-  const dbReadyState = mongoose.connection.readyState;
   return {
     service: "aryan-disasters-ai-server",
     status: "ok",
@@ -32,10 +24,7 @@ function getHealthPayload() {
     timestamp: new Date().toISOString(),
     uptimeSeconds: Math.floor(process.uptime()),
     checks: {
-      database: {
-        status: dbStateLabel[dbReadyState] || "unknown",
-        readyState: dbReadyState
-      }
+      database: getDbDebugInfo()
     }
   };
 }
@@ -59,7 +48,7 @@ app.get("/api/health", (req, res) => {
 
 app.get("/api/health/ready", (req, res) => {
   const payload = getHealthPayload();
-  const isReady = payload.checks.database.status === "connected";
+  const isReady = isDbConnected();
 
   return res.status(isReady ? 200 : 503).json({
     success: isReady,
