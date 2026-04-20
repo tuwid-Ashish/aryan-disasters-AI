@@ -35,6 +35,7 @@ coverage/
 .DS_Store
 Thumbs.db
 
+scripts/
 # IDE and editor files
 .vscode/
 .idea/
