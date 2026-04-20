@@ -5,5 +5,5 @@ export const ROLES = {
   VOLUNTEER: "volunteer"
 };
 
-export const APP_NAME = import.meta.env.VITE_APP_NAME || "Aryan Disasters AI";
+export const APP_NAME = import.meta.env.VITE_APP_NAME || "Disasters AI";
 

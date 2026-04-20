@@ -55,7 +55,7 @@ export function HomePage() {
         <header className="landing-topline">
           <div>
             <p className="eyebrow">Disaster Response Command System</p>
-            <h1>Aryan Disasters AI</h1>
+            <h1>Disasters AI</h1>
           </div>
           <span className="landing-status">Live orchestration model</span>
         </header>

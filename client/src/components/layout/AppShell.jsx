@@ -65,7 +65,7 @@ export function AppShell() {
           </div>
           <div>
             <p className="eyebrow is-sidebar">Relief Ops Grid</p>
-            <h1>Aryan Disasters AI</h1>
+            <h1>Disasters AI</h1>
             <p className="sidebar-copy">
               Centralized disaster management for live operations, verified logistics, and AI-driven response planning.
             </p>
