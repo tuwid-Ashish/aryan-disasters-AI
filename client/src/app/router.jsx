@@ -2,6 +2,8 @@ import { Navigate, Outlet, createBrowserRouter } from "react-router-dom";
 import { useAuth } from "./providers";
 import { AppShell } from "../components/layout/AppShell";
 import { HomePage } from "../pages/public/HomePage";
+import { PricingPage } from "../pages/public/PricingPage";
+import { AboutPage } from "../pages/public/AboutPage";
 import { LoginPage } from "../pages/public/LoginPage";
 import { RegisterPage } from "../pages/public/RegisterPage";
 import { DashboardPage } from "../pages/DashboardPage";
@@ -47,6 +49,14 @@ export const router = createBrowserRouter([
   {
     path: "/",
     element: <HomePage />
+  },
+  {
+    path: "/pricing",
+    element: <PricingPage />
+  },
+  {
+    path: "/about",
+    element: <AboutPage />
   },
   {
     path: "/login",

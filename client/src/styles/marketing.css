@@ -1,0 +1,416 @@
+@import url("https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=Public+Sans:wght@400;500;600;700;800&display=swap");
+
+.gov-site {
+  --gov-ink: #0f2633;
+  --gov-muted: #4b6270;
+  --gov-border: rgba(15, 38, 51, 0.14);
+  --gov-panel: rgba(255, 255, 255, 0.82);
+  --gov-panel-strong: #fefcf8;
+  --gov-deep: #0c3446;
+  --gov-sea: #0a7f8c;
+  --gov-sand: #d8a247;
+  --gov-focus: #0a7f8c;
+  min-height: 100vh;
+  font-family: "Public Sans", "Segoe UI", sans-serif;
+  color: var(--gov-ink);
+  background:
+    radial-gradient(circle at 12% 10%, rgba(10, 127, 140, 0.18), transparent 30%),
+    radial-gradient(circle at 90% 8%, rgba(216, 162, 71, 0.18), transparent 28%),
+    linear-gradient(180deg, #eff5f7 0%, #dce9ef 56%, #d2e1e7 100%);
+  padding: clamp(14px, 2vw, 30px);
+}
+
+.skip-link {
+  position: absolute;
+  top: -60px;
+  left: 16px;
+  z-index: 100;
+  padding: 8px 14px;
+  border-radius: 10px;
+  background: var(--gov-deep);
+  color: #f9fcff;
+}
+
+.skip-link:focus {
+  top: 12px;
+}
+
+.gov-header {
+  width: min(1240px, 100%);
+  margin: 0 auto;
+  padding: 16px 18px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.58);
+  background: rgba(245, 251, 253, 0.8);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 22px 48px rgba(12, 52, 70, 0.14);
+  display: grid;
+  grid-template-columns: 1.1fr auto auto;
+  gap: 14px;
+  align-items: center;
+}
+
+.gov-header-brand {
+  min-width: 0;
+}
+
+.gov-brand-link {
+  display: inline-block;
+  margin-top: 2px;
+  font-family: "Fraunces", Georgia, serif;
+  font-size: clamp(1.35rem, 2.2vw, 1.8rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.gov-nav {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.gov-nav-link {
+  min-height: 40px;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  color: #204152;
+  font-weight: 600;
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.gov-nav-link:hover {
+  background: rgba(10, 127, 140, 0.09);
+  border-color: rgba(10, 127, 140, 0.2);
+}
+
+.gov-nav-link.is-active {
+  background: linear-gradient(135deg, rgba(10, 127, 140, 0.16), rgba(12, 52, 70, 0.14));
+  border-color: rgba(12, 52, 70, 0.25);
+}
+
+.gov-header-actions {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-end;
+}
+
+.gov-site .primary-button {
+  border-radius: 12px;
+  background: linear-gradient(135deg, #0c4f66, #0a7f8c);
+}
+
+.gov-site .ghost-button {
+  border-radius: 12px;
+  border-color: rgba(12, 52, 70, 0.2);
+  background: rgba(248, 252, 253, 0.75);
+}
+
+.gov-main {
+  width: min(1240px, 100%);
+  margin: 16px auto 0;
+}
+
+.gov-page {
+  display: grid;
+  gap: 16px;
+}
+
+.gov-page .page-hero,
+.gov-page .section-card,
+.gov-procurement-cta,
+.gov-pricing-cta,
+.gov-about-cta,
+.gov-footer {
+  border-radius: 24px;
+  border: 1px solid var(--gov-border);
+  background: var(--gov-panel);
+  box-shadow: 0 24px 56px rgba(11, 43, 58, 0.13);
+}
+
+.gov-page .page-hero {
+  background:
+    radial-gradient(circle at 92% 20%, rgba(10, 127, 140, 0.11), transparent 44%),
+    linear-gradient(140deg, rgba(255, 255, 255, 0.88), rgba(245, 252, 254, 0.86));
+}
+
+.gov-page h3,
+.gov-page h4 {
+  color: #123447;
+}
+
+.gov-page h3,
+.gov-brand-link,
+.gov-pricing-price {
+  font-family: "Fraunces", Georgia, serif;
+  letter-spacing: -0.01em;
+}
+
+.gov-trust-strip {
+  display: grid;
+  gap: 12px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gov-trust-item {
+  padding: 14px 16px;
+  border-radius: 18px;
+  background: rgba(10, 127, 140, 0.08);
+  border: 1px solid rgba(10, 127, 140, 0.16);
+}
+
+.gov-trust-item p {
+  margin: 0;
+  color: #144353;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+
+.gov-feature-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gov-feature-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(244, 250, 252, 0.86));
+}
+
+.gov-two-col {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: 1.05fr 0.95fr;
+}
+
+.gov-workflow-list {
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+
+.gov-workflow-list li {
+  list-style: none;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: flex-start;
+  padding: 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(15, 38, 51, 0.1);
+  background: var(--gov-panel-strong);
+}
+
+.gov-workflow-list span {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 12px;
+  font-weight: 800;
+  color: #0b4e62;
+  background: rgba(10, 127, 140, 0.12);
+}
+
+.gov-workflow-list p,
+.gov-role-item p,
+.gov-procurement-cta p,
+.gov-pricing-cta p,
+.gov-about-cta p,
+.gov-footer p,
+.gov-page .section-card-copy,
+.gov-page .page-hero p,
+.gov-list {
+  margin: 0;
+  color: var(--gov-muted);
+  line-height: 1.58;
+}
+
+.gov-role-grid {
+  display: grid;
+  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.gov-role-item {
+  border-radius: 16px;
+  border: 1px solid rgba(15, 38, 51, 0.1);
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.78);
+}
+
+.gov-role-item h4 {
+  margin: 0 0 6px;
+}
+
+.gov-proof-card .metric-card {
+  background: rgba(255, 255, 255, 0.86);
+  border-color: rgba(15, 38, 51, 0.1);
+}
+
+.gov-proof-card .metric-card em {
+  color: #0d5265;
+  background: rgba(10, 127, 140, 0.12);
+}
+
+.gov-procurement-cta,
+.gov-pricing-cta,
+.gov-about-cta {
+  padding: clamp(16px, 2.2vw, 24px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  background: linear-gradient(140deg, rgba(245, 252, 254, 0.88), rgba(236, 246, 249, 0.88));
+}
+
+.gov-procurement-cta h3 {
+  margin: 0 0 8px;
+}
+
+.gov-pricing-grid,
+.gov-about-grid {
+  display: grid;
+  gap: 14px;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.gov-pricing-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.9), rgba(245, 252, 253, 0.86));
+}
+
+.gov-pricing-price {
+  margin: 0 0 12px;
+  color: #0a4f60;
+  font-size: 1.35rem;
+}
+
+.gov-list {
+  margin: 0;
+  padding-left: 20px;
+  display: grid;
+  gap: 8px;
+}
+
+.gov-list li {
+  color: var(--gov-muted);
+}
+
+.gov-list-ordered {
+  padding-left: 22px;
+}
+
+.gov-credibility-card {
+  background: linear-gradient(140deg, rgba(255, 255, 255, 0.88), rgba(244, 250, 252, 0.84));
+}
+
+.gov-footer {
+  width: min(1240px, 100%);
+  margin: 16px auto 0;
+  padding: 18px;
+  display: grid;
+  gap: 6px;
+}
+
+.gov-page > * {
+  opacity: 0;
+  transform: translateY(10px);
+  animation: gov-rise 420ms ease forwards;
+}
+
+.gov-page > *:nth-child(2) {
+  animation-delay: 70ms;
+}
+
+.gov-page > *:nth-child(3) {
+  animation-delay: 120ms;
+}
+
+.gov-page > *:nth-child(4) {
+  animation-delay: 170ms;
+}
+
+.gov-page > *:nth-child(5) {
+  animation-delay: 220ms;
+}
+
+.gov-page > *:nth-child(6) {
+  animation-delay: 260ms;
+}
+
+@keyframes gov-rise {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.gov-site a:focus-visible,
+.gov-site button:focus-visible,
+.gov-site [tabindex="-1"]:focus-visible {
+  outline: 3px solid var(--gov-focus);
+  outline-offset: 2px;
+}
+
+@media (max-width: 1080px) {
+  .gov-header {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .gov-nav,
+  .gov-header-actions {
+    justify-content: flex-start;
+  }
+
+  .gov-trust-strip,
+  .gov-feature-grid,
+  .gov-two-col,
+  .gov-pricing-grid,
+  .gov-about-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 680px) {
+  .gov-site {
+    padding: 10px;
+  }
+
+  .gov-header,
+  .gov-page .page-hero,
+  .gov-page .section-card,
+  .gov-procurement-cta,
+  .gov-pricing-cta,
+  .gov-about-cta,
+  .gov-footer {
+    border-radius: 18px;
+    padding: 14px;
+  }
+
+  .gov-procurement-cta,
+  .gov-pricing-cta,
+  .gov-about-cta,
+  .gov-page .page-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .gov-header-actions,
+  .gov-page .hero-actions {
+    width: 100%;
+  }
+
+  .gov-header-actions .primary-button,
+  .gov-header-actions .ghost-button,
+  .gov-page .hero-actions .primary-button,
+  .gov-page .hero-actions .ghost-button {
+    width: 100%;
+  }
+
+  .gov-role-grid {
+    grid-template-columns: 1fr;
+  }
+}
