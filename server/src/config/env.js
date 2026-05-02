@@ -17,6 +17,11 @@ export const env = {
   mongodbUri: process.env.MONGODB_URI,
   jwtSecret: process.env.JWT_SECRET,
   jwtExpiresIn: process.env.JWT_EXPIRES_IN || "7d",
-  geminiApiKey: process.env.GEMINI_API_KEY || ""
+  geminiApiKey: process.env.GEMINI_API_KEY || "",
+  geminiModel: process.env.GEMINI_MODEL || "gemini-2.0-flash",
+  groqApiKey: process.env.GROQ_API_KEY || "",
+  groqModel: process.env.GROQ_MODEL || "llama-3.3-70b-versatile",
+  llmProvider: process.env.LLM_PROVIDER || "",
+  llmApiKey: process.env.LLM_API_KEY || ""
 };
 

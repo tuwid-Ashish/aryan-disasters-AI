@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import { MetricGrid } from "../../components/common/MetricGrid";
-import { PageHero } from "../../components/common/PageHero";
 import { MarketingLayout } from "../../components/layout/MarketingLayout";
 import { SectionCard } from "../../components/ui/SectionCard";
 import { usePageMetadata } from "../../hooks/usePageMetadata";
@@ -18,10 +17,19 @@ export function HomePage() {
   return (
     <MarketingLayout>
       <div className="gov-page gov-home">
-        <PageHero
-          title={hero.title}
-          description={hero.description}
-          actions={
+        <section className="gov-hero" aria-label="Platform overview">
+          <article className="gov-hero-copy">
+            <p className="eyebrow">{hero.eyebrow}</p>
+            <p className="gov-hero-tagline">{hero.tagline}</p>
+            <h1>{hero.title}</h1>
+            <p className="gov-hero-description">{hero.description}</p>
+
+            <ul className="gov-hero-highlights" aria-label="Hero highlights">
+              {hero.highlights.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
+
             <div className="hero-actions">
               <Link className="primary-button" to={hero.primaryCta.to}>
                 {hero.primaryCta.label}
@@ -30,8 +38,31 @@ export function HomePage() {
                 {hero.secondaryCta.label}
               </Link>
             </div>
-          }
-        />
+          </article>
+
+          <article className="gov-hero-visual" aria-label="Response flow visual">
+            <p className="gov-hero-visual-label">Live coordination signal</p>
+            <h3>Incident to delivery command loop</h3>
+
+            <ol className="gov-hero-sequence">
+              {workflow.map((step, index) => (
+                <li key={step.title}>
+                  <span>{String(index + 1).padStart(2, "0")}</span>
+                  <strong>{step.title}</strong>
+                </li>
+              ))}
+            </ol>
+
+            <div className="gov-hero-metrics" aria-label="Proof metrics">
+              {proofMetrics.map((item) => (
+                <article key={item.label}>
+                  <span>{item.label}</span>
+                  <strong>{item.value}</strong>
+                </article>
+              ))}
+            </div>
+          </article>
+        </section>
 
         <section className="gov-trust-strip" aria-label="Trust pillars">
           {trustPillars.map((item) => (

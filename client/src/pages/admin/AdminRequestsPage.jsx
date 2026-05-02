@@ -1,6 +1,7 @@
 import { PageHero } from "../../components/common/PageHero";
 import { SectionCard } from "../../components/ui/SectionCard";
 import { useAsyncData } from "../../hooks/useAsyncData";
+import { useAiPriorityExplanation } from "../../hooks/useAi";
 import { api } from "../../lib/api";
 import { DataState } from "../../components/ui/DataState";
 import { DataTable } from "../../components/ui/DataTable";
@@ -11,10 +12,25 @@ import { useState } from "react";
 export function AdminRequestsPage() {
   const [pendingAction, setPendingAction] = useState("");
   const [actionError, setActionError] = useState("");
+  const [selectedRequest, setSelectedRequest] = useState(null);
   const requests = useAsyncData(async () => {
     const response = await api.get("/requests");
     return response.data.data;
   }, []);
+
+  const explanation = useAiPriorityExplanation(
+    selectedRequest
+      ? {
+          category: selectedRequest.category,
+          urgencyLevel: selectedRequest.urgencyLevel,
+          peopleAffected: selectedRequest.peopleAffected,
+          disasterSeverity: selectedRequest.disasterSeverity || "medium",
+          verificationStatus: selectedRequest.verificationStatus,
+          status: selectedRequest.status
+        }
+      : null,
+    [selectedRequest?._id]
+  );
 
   async function updateVerification(id, verificationStatus) {
     const actionKey = `${id}:${verificationStatus}`;
@@ -52,6 +68,7 @@ export function AdminRequestsPage() {
   const rows =
     requests.data?.map((item) => ({
       id: item._id,
+      raw: item,
       category: titleCase(item.category),
       urgency: item.urgencyLevel,
       affected: formatNumber(item.peopleAffected),
@@ -105,6 +122,13 @@ export function AdminRequestsPage() {
                     >
                       Approve
                     </button>
+                    <button
+                      className="mini-button"
+                      onClick={() => setSelectedRequest(row.raw)}
+                      type="button"
+                    >
+                      Explain AI
+                    </button>
                   </div>
                 )
               }
@@ -113,6 +137,41 @@ export function AdminRequestsPage() {
           />
         </DataState>
       </SectionCard>
+
+      {selectedRequest ? (
+        <div className="ai-modal-backdrop" role="presentation" onClick={() => setSelectedRequest(null)}>
+          <section
+            className="ai-modal"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="ai-modal-title"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <header className="ai-modal-header">
+              <div>
+                <p className="eyebrow">AI explanation</p>
+                <h3 id="ai-modal-title">Why this request is prioritized</h3>
+              </div>
+              <button className="mini-button dark" type="button" onClick={() => setSelectedRequest(null)}>
+                Close
+              </button>
+            </header>
+
+            <div className="ai-modal-meta">
+              <StatusBadge value={selectedRequest.verificationStatus} />
+              <StatusBadge value={selectedRequest.status} />
+              <StatusBadge value={selectedRequest.urgencyLevel} />
+            </div>
+
+            <DataState isLoading={explanation.isLoading} error={explanation.error} empty={!explanation.data}>
+              <p>{explanation.data?.summary}</p>
+              {typeof explanation.data?.score === "number" ? (
+                <p className="form-message">Priority score: {explanation.data.score}</p>
+              ) : null}
+            </DataState>
+          </section>
+        </div>
+      ) : null}
     </div>
   );
 }

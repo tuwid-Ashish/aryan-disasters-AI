@@ -15,9 +15,16 @@ export const MARKETING_NAV_LINKS = [
 
 export const MARKETING_HOME_CONTENT = {
   hero: {
+    eyebrow: "National & State Disaster Operations Platform",
+    tagline: "From verified requests to fulfilled deliveries",
     title: "Procurement-ready disaster coordination for public agencies",
     description:
       "Disasters AI unifies verified demand, available supply, and explainable AI prioritization in one command workflow built for accountability.",
+    highlights: [
+      "Decision-ready dashboards for incident command teams",
+      "Transparent approval gates before dispatch",
+      "Traceable field execution from pickup to completion"
+    ],
     primaryCta: { label: "Book Procurement Demo", to: "/pricing" },
     secondaryCta: { label: "View Platform Approach", to: "/about" }
   },

@@ -2,6 +2,7 @@ import { PageHero } from "../../components/common/PageHero";
 import { SectionCard } from "../../components/ui/SectionCard";
 import { MetricGrid } from "../../components/common/MetricGrid";
 import { useAsyncData } from "../../hooks/useAsyncData";
+import { useAiDisasterSummary } from "../../hooks/useAi";
 import { api } from "../../lib/api";
 import { DataState } from "../../components/ui/DataState";
 import { InsightList } from "../../components/ui/InsightList";
@@ -12,13 +13,15 @@ export function AdminAnalyticsPage() {
     const response = await api.get("/dashboard/overview");
     return response.data.data;
   }, []);
-  const summary = useAsyncData(async () => {
-    const response = await api.post("/ai/disaster-summary", {
+  const summary = useAiDisasterSummary(
+    {
       title: "Current response network",
-      region: "Active regions"
-    });
-    return response.data.data;
-  }, []);
+      region: "Active regions",
+      severity: "medium",
+      status: "active"
+    },
+    []
+  );
 
   const metrics = [
     {
